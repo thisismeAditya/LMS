@@ -13,7 +13,7 @@ public class Request {
 	
 	@Id
 	@Column(name="requester_mail_id")
-	private String requestMailId;
+	private String requesterMailId;
 	
 	@Id
 	@Column(name="book_name", length=150)
@@ -26,11 +26,11 @@ public class Request {
 	@Enumerated(EnumType.STRING)
 	private String ifAdded;
 	
-	public String getRequestMailId() {
-		return requestMailId;
+	public String getRequesterMailId() {
+		return requesterMailId;
 	}
-	public void setRequestMailId(String requestMailId) {
-		this.requestMailId = requestMailId;
+	public void setRequesterMailId(String requestMailId) {
+		this.requesterMailId = requestMailId;
 	}
 	public String getBookName() {
 		return bookName;
@@ -51,9 +51,9 @@ public class Request {
 		this.ifAdded = ifAdded;
 	}
 	
-	public Request(String requestMailId, String bookName, String bookAuthor, String ifAdded) {
+	public Request(String requesterMailId, String bookName, String bookAuthor, String ifAdded) {
 		super();
-		this.requestMailId = requestMailId;
+		this.requesterMailId = requesterMailId;
 		this.bookName = bookName;
 		this.bookAuthor = bookAuthor;
 		this.ifAdded = ifAdded;
