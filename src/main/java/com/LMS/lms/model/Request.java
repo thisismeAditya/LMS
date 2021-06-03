@@ -11,6 +11,7 @@ import javax.persistence.Table;
 @Table(name="requests")
 public class Request {
 	
+	@Id
 	@Column(name="requester_mail_id")
 	private String requestMailId;
 	
