@@ -1,0 +1,22 @@
+package com.LMS.lms.dao;
+
+import java.util.List;
+
+import com.LMS.lms.exception.UserIdPasswordMismatchException;
+import com.LMS.lms.exception.UserNotFoundException;
+import com.LMS.lms.model.Issues;
+import com.LMS.lms.model.Member;
+
+public interface IMemberDao {
+
+	public Member memberLogin(String memberMailId, String password) throws UserIdPasswordMismatchException, UserNotFoundException;
+
+	public List<Issues> getIssuesByMemberMailId(String memberMailId);
+
+	public List<Issues> getIssuesByMemberMailIdandBookName(String memberMailId, String bookName);
+
+	public List<Issues> getIssuesByMemberMailIdandBookAuthor(String memberMailId, String bookAuthor);
+
+	public float getPenatlyByMemberId(String memberMailId);
+
+}

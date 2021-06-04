@@ -82,6 +82,6 @@ public class ExceptionController {
 		//the user might be able to resolve the conflict and resubmit the request. 
 				
 		//409 Conflict
-		return new ResponseEntity<Object>("Reffered Object already exists in the system!", HttpStatus.CONFLICT);
+		return new ResponseEntity<Object>("Already exists in the system!", HttpStatus.CONFLICT);
 	}
 }

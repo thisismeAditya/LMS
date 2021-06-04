@@ -58,7 +58,7 @@ public class AdminController {
 	@RequestMapping(value="/admin/viewMemberIssueHistory/{memberMailId}", method = RequestMethod.GET)
 	public ResponseEntity<List<Issues>> viewMemberIssueHistory(@PathVariable String memberMailId) throws UserNotFoundException, Exception{
 		//TODO: error handler show where actual date of return is null
-		return ResponseEntity.accepted().body(adminService.viewMember(memberMailId));
+		return ResponseEntity.accepted().body(adminService.viewMemberIssueHistory(memberMailId));
 	}
 	
 	@RequestMapping(value ="/admin/deleteMember/{memberMailId}", method = RequestMethod.DELETE)
@@ -114,15 +114,15 @@ public class AdminController {
 		return ResponseEntity.accepted().body(issueService.removeRequestForIssue(memberMailId, bookName, bookAuthor));
 	}
 	
-	@RequestMapping(value="/admin/closeIssue/{memberMailId}", method = RequestMethod.GET)
-	public ResponseEntity<Issues> closeIssue(@PathVariable String memberMailId) throws NoRecordsFoundException, Exception{
+	@RequestMapping(value="/admin/closeIssue/{issueId}", method = RequestMethod.GET)
+	public ResponseEntity<Issues> closeIssue(@PathVariable int issueId) throws NoRecordsFoundException, Exception{
 		//TODO: error handler show where actual date of return is null 
-		return ResponseEntity.accepted().body(issueService.closingIssues(memberMailId));
+		return ResponseEntity.accepted().body(issueService.closingIssues(issueId));
 	}
 	
-	@RequestMapping(value="/admin/renewIssue/{memberMailId}", method = RequestMethod.GET)
-	public ResponseEntity<Issues> renewIssue(@PathVariable String memberMailId) throws NoRecordsFoundException, Exception{
+	@RequestMapping(value="/admin/renewIssue/{issueId}", method = RequestMethod.GET)
+	public ResponseEntity<Issues> renewIssue(@PathVariable int issueId) throws NoRecordsFoundException, Exception{
 		//TODO: error handler show where actual date of return is null 
-		return ResponseEntity.accepted().body(issueService.renewingIssues(memberMailId));
+		return ResponseEntity.accepted().body(issueService.renewingIssues(issueId));
 	}
 }

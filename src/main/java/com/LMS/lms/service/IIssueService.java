@@ -8,8 +8,8 @@ import com.LMS.lms.model.RequestIssue;
 public interface IIssueService {
 	
 	public boolean addIssues(int bookId, String memberMailId, String adminMailId);
-	public Issues closingIssues(String memberMailId);
-	public Issues renewingIssues(String memberMailId);
+	public Issues closingIssues(int issueId);
+	public Issues renewingIssues(int issueId);
 	public boolean addIssueRequest(String memberMailId, String bookName, String bookAuthor);
 	public List<RequestIssue> viewAllRequest();
 	public boolean confirmRequestForIssue(String memberMailId, String bookName, String bookAuthor, String adminMailId);
