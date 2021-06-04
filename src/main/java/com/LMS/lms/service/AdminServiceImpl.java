@@ -19,7 +19,7 @@ public class AdminServiceImpl implements IAdminService {
 	IAdminDao adminDao;
 
 	@Override
-	public Admin adminLogin(String adminMailId, String password) throws UserIdPasswordMismatchException, UserNotFoundException {
+	public Admin adminLogin(String adminMailId, String password) throws UserIdPasswordMismatchException, UserNotFoundException{
 		// TODO Auto-generated method stub	
 		return adminDao.login(adminMailId, password);
 	}

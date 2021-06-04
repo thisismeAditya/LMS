@@ -15,10 +15,10 @@ public interface IIssueDao {
 
 	public Issues renewingIssues(int issueId);
 
-	public List<RequestIssue> viewAllRequest();
+	public List<RequestIssue> viewAllRequest() throws Exception;
 
-	public boolean addRequestToIssue(String memberMailId, String bookName, String bookAuthor, String adminMailId);
+	public boolean addRequestToIssue(String memberMailId, String bookName, String bookAuthor, String adminMailId) throws Exception;
 
-	public boolean removeRequestFromRequestIssue(String memberMailId, String bookName, String bookAuthor);
+	public boolean removeRequestFromRequestIssue(String memberMailId, String bookName, String bookAuthor) throws Exception;
 
 }

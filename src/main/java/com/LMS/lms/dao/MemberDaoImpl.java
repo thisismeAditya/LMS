@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.LMS.lms.exception.UserIdPasswordMismatchException;
 import com.LMS.lms.exception.UserNotFoundException;
+import com.LMS.lms.mapper.IssueMapper;
 import com.LMS.lms.mapper.MemberMapper;
 import com.LMS.lms.model.Issues;
 import com.LMS.lms.model.Member;
@@ -39,27 +40,36 @@ public class MemberDaoImpl implements IMemberDao {
 	}
 
 	@Override
-	public List<Issues> getIssuesByMemberMailId(String memberMailId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Issues> getIssuesByMemberMailId(String memberMailId) throws Exception{
+		String sql = "select * from issues where member_mail_id='"+memberMailId+"'";
+		List<Issues> issueList = jdbcTemplate.query(sql, new IssueMapper());
+		
+		return issueList;
 	}
 
 	@Override
-	public List<Issues> getIssuesByMemberMailIdandBookName(String memberMailId, String bookName) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Issues> getIssuesByMemberMailIdandBookName(String memberMailId, String bookName) throws Exception{
+		String sql = "select * from issues where member_mail_id='"+memberMailId+"' and book_name='"+bookName+"'";
+		List<Issues> issueListByBookName = jdbcTemplate.query(sql, new IssueMapper());
+		
+		return issueListByBookName;
 	}
 
 	@Override
-	public List<Issues> getIssuesByMemberMailIdandBookAuthor(String memberMailId, String bookAuthor) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Issues> getIssuesByMemberMailIdandBookAuthor(String memberMailId, String bookAuthor) throws Exception{
+		String sql = "select * from issues where member_mail_id='"+memberMailId+"' and book_author='"+bookAuthor+"'";
+		List<Issues> issueListByBookAuthor = jdbcTemplate.query(sql, new IssueMapper());
+		
+		return issueListByBookAuthor;
 	}
 
 	@Override
-	public float getPenatlyByMemberId(String memberMailId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public float getPenatlyByMemberId(String memberMailId) throws Exception{
+		String sql = "select sum(penalty) from issues where member_mail_id='"+memberMailId+"'";
+		
+		Float totalPenalty = jdbcTemplate.queryForObject(sql, Float.class);
+		
+		return totalPenalty;
 	}
 
 }

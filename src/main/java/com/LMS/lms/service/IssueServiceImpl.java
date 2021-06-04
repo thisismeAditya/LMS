@@ -38,19 +38,19 @@ public class IssueServiceImpl implements IIssueService {
 	}
 
 	@Override
-	public List<RequestIssue> viewAllRequest() {
+	public List<RequestIssue> viewAllRequest() throws Exception {
 		// TODO Auto-generated method stub
 		return issueDao.viewAllRequest();
 	}
 
 	@Override
-	public boolean confirmRequestForIssue(String memberMailId, String bookName, String bookAuthor, String adminMailId) {
+	public boolean confirmRequestForIssue(String memberMailId, String bookName, String bookAuthor, String adminMailId) throws Exception {
 		// TODO Auto-generated method stub
 		return issueDao.addRequestToIssue(memberMailId, bookName, bookAuthor, adminMailId);
 	}
 
 	@Override
-	public boolean removeRequestForIssue(String memberMailId, String bookName, String bookAuthor) {
+	public boolean removeRequestForIssue(String memberMailId, String bookName, String bookAuthor) throws Exception {
 		// TODO Auto-generated method stub
 		return issueDao.removeRequestFromRequestIssue(memberMailId, bookName, bookAuthor);
 	}

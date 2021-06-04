@@ -10,9 +10,9 @@ import com.LMS.lms.model.Member;
 public interface IMemberService {
 	
 	public Member memberLogin(String memberMailId, String password) throws UserIdPasswordMismatchException, UserNotFoundException;
-	public List<Issues> getIssues(String memberMailId);
-	public List<Issues> getIssuesByBookName(String memberMailId, String bookName);
-	public List<Issues> getIssuesByBookAuthor(String memberMailId,String bookAuthor);
-	public float getPenalty(String memberMailId);
+	public List<Issues> getIssues(String memberMailId) throws Exception;
+	public List<Issues> getIssuesByBookName(String memberMailId, String bookName) throws Exception;
+	public List<Issues> getIssuesByBookAuthor(String memberMailId,String bookAuthor) throws Exception;
+	public float getPenalty(String memberMailId) throws Exception;
 
 }

@@ -22,25 +22,25 @@ public class MemberServiceImpl implements IMemberService {
 	}
 
 	@Override
-	public List<Issues> getIssues(String memberMailId) {
+	public List<Issues> getIssues(String memberMailId) throws Exception {
 		// TODO Auto-generated method stub
 		return memberDao.getIssuesByMemberMailId(memberMailId);
 	}
 
 	@Override
-	public List<Issues> getIssuesByBookName(String memberMailId, String bookName) {
+	public List<Issues> getIssuesByBookName(String memberMailId, String bookName) throws Exception {
 		// TODO Auto-generated method stub
 		return memberDao.getIssuesByMemberMailIdandBookName(memberMailId, bookName);
 	}
 
 	@Override
-	public List<Issues> getIssuesByBookAuthor(String memberMailId, String bookAuthor) {
+	public List<Issues> getIssuesByBookAuthor(String memberMailId, String bookAuthor) throws Exception {
 		// TODO Auto-generated method stub
 		return memberDao.getIssuesByMemberMailIdandBookAuthor(memberMailId, bookAuthor);
 	}
 
 	@Override
-	public float getPenalty(String memberMailId) {
+	public float getPenalty(String memberMailId) throws Exception {
 		// TODO Auto-generated method stub
 		return memberDao.getPenatlyByMemberId(memberMailId);
 	}

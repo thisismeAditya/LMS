@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.LMS.lms.dao.IBookDao;
+import com.LMS.lms.exception.BookNotFoundException;
+import com.LMS.lms.exception.NoRecordsFoundException;
 import com.LMS.lms.model.Books;
 import com.LMS.lms.model.Issues;
 
@@ -14,43 +16,43 @@ public class BookServiceImpl implements IBookService {
 	IBookDao bookDao;
 
 	@Override
-	public boolean addBook(Books book) {
+	public boolean addBook(Books book) throws Exception {
 		// TODO Auto-generated method stub
 		return bookDao.addBook(book);
 	}
 
 	@Override
-	public List<Issues> viewBookIssueHistory(String bookName, String bookAuthor) {
+	public List<Issues> viewBookIssueHistory(String bookName, String bookAuthor) throws NoRecordsFoundException {
 		// TODO Auto-generated method stub
 		return bookDao.viewBookIssueHistory(bookName, bookAuthor);
 	}
 
 	@Override
-	public boolean removeBookFromLibrary(String bookName, String bookAuthor) {
+	public boolean removeBookFromLibrary(String bookName, String bookAuthor) throws BookNotFoundException {
 		// TODO Auto-generated method stub
 		return bookDao.removeBookFromLibrary(bookName, bookAuthor);
 	}
 
 	@Override
-	public List<Books> searchBookByName(String bookName) {
+	public List<Books> searchBookByName(String bookName) throws BookNotFoundException {
 		// TODO Auto-generated method stub
 		return bookDao.searchBookByName(bookName);
 	}
 
 	@Override
-	public List<Books> searchBookByAuthor(String bookAuthor) {
+	public List<Books> searchBookByAuthor(String bookAuthor) throws BookNotFoundException {
 		// TODO Auto-generated method stub
 		return bookDao.searchBookByAuthor(bookAuthor);
 	}
 
 	@Override
-	public List<Books> searchBookByCategory(String category) {
+	public List<Books> searchBookByCategory(String category) throws BookNotFoundException {
 		// TODO Auto-generated method stub
 		return bookDao.searchBookByCategory(category);
 	}
 
 	@Override
-	public List<Books> viewAllBooks() {
+	public List<Books> viewAllBooks() throws Exception {
 		// TODO Auto-generated method stub
 		return bookDao.viewAllBooks();
 	}

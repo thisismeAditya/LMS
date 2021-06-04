@@ -39,7 +39,7 @@ public class AdminDaoImpl implements IAdminDao {
 		throw new UserNotFoundException();
 	}
 
-	private Admin checkIfEmailExists(String adminMailId) {
+	private Admin checkIfEmailExists(String adminMailId){
 		String sql = "select admin_mail_id, admin_name, admin_password from admin where admin_mail_id='"+adminMailId+"'";
 		Admin admin = jdbcTemplate.queryForObject(sql, new AdminEmailRowMapper());
 		

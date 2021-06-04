@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.LMS.lms.exception.BookAlreadyExistsInLibraryException;
+import com.LMS.lms.exception.BookAlreadyRequestedException;
 import com.LMS.lms.exception.BookNotFoundException;
 import com.LMS.lms.exception.EmailAlreadyExistsException;
 import com.LMS.lms.exception.NoRecordsFoundException;
@@ -83,5 +84,15 @@ public class ExceptionController {
 				
 		//409 Conflict
 		return new ResponseEntity<Object>("Already exists in the system!", HttpStatus.CONFLICT);
+	}
+	
+	@ExceptionHandler(value = BookAlreadyRequestedException.class)
+	public ResponseEntity<Object> exception(BookAlreadyRequestedException exception){
+		//HttpStatus.CONFLICT -> The request could not be completed due to a conflict with the current state of the resource. 
+		//This code is only allowed in situations where it is expected that 
+		//the user might be able to resolve the conflict and resubmit the request. 
+				
+		//409 Conflict
+		return new ResponseEntity<Object>("Book already requested!", HttpStatus.CONFLICT);
 	}
 }

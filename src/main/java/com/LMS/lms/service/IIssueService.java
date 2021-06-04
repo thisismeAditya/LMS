@@ -11,8 +11,8 @@ public interface IIssueService {
 	public Issues closingIssues(int issueId);
 	public Issues renewingIssues(int issueId);
 	public boolean addIssueRequest(String memberMailId, String bookName, String bookAuthor);
-	public List<RequestIssue> viewAllRequest();
-	public boolean confirmRequestForIssue(String memberMailId, String bookName, String bookAuthor, String adminMailId);
-	public boolean removeRequestForIssue(String memberMailId, String bookName, String bookAuthor);
+	public List<RequestIssue> viewAllRequest() throws Exception;
+	public boolean confirmRequestForIssue(String memberMailId, String bookName, String bookAuthor, String adminMailId) throws Exception;
+	public boolean removeRequestForIssue(String memberMailId, String bookName, String bookAuthor) throws Exception;
 
 }
