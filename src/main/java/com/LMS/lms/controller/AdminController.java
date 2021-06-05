@@ -125,4 +125,16 @@ public class AdminController {
 		//TODO: error handler show where actual date of return is null 
 		return ResponseEntity.accepted().body(issueService.renewingIssues(issueId));
 	}
+	
+	@RequestMapping(value="/admin/updateAllPenalties", method = RequestMethod.PUT)
+	public ResponseEntity<Boolean> updateAllPenalties() {
+		//TODO: error handler show where actual date of return is null 
+		return ResponseEntity.accepted().body(issueService.updatePenalties());
+	}
+	
+	@RequestMapping(value="/admin/settlePenalties", method = RequestMethod.PUT)
+	public ResponseEntity<Float> updateAllPenalties(String memberMailId, int issueId) {
+		//TODO: error handler show where actual date of return is null 
+		return ResponseEntity.accepted().body(issueService.settlePenalties(memberMailId, issueId));
+	}
 }
