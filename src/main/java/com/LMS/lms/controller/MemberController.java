@@ -3,7 +3,9 @@ package com.LMS.lms.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,7 +59,7 @@ public class MemberController {
 		return ResponseEntity.accepted().body(memberService.getIssuesByBookName(memberMailId, bookName));
 	}
 	
-	@RequestMapping(value="/member/serachIssuesByName/{memberMailId}/{bookAuthor}", method = RequestMethod.GET)
+	@RequestMapping(value="/member/serachIssuesByAuthor/{memberMailId}/{bookAuthor}", method = RequestMethod.GET)
 	public ResponseEntity<List<Issues>> viewIssuesByBookAuthor(@PathVariable String memberMailId, @PathVariable String bookAuthor) throws BookNotFoundException, Exception{
 		//TODO: error handler
 		return ResponseEntity.accepted().body(memberService.getIssuesByBookAuthor(memberMailId, bookAuthor));
@@ -94,25 +96,25 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/member/searchByName/{bookName}", method = RequestMethod.GET)
-	public ResponseEntity<List<Books>> viewAllBooksByName(@PathVariable String bookName) throws BookNotFoundException, Exception{
+	public ResponseEntity<List<Books>> viewAllBooksByName(@PathVariable String bookName) throws BookNotFoundException, HttpMessageNotReadableException{
 		//TODO: error handler
 		return ResponseEntity.accepted().body(bookService.searchBookByName(bookName));
 	}
 	
-	@RequestMapping(value="/member/searchByName/{bookAuthor}", method = RequestMethod.GET)
-	public ResponseEntity<List<Books>> viewAllBooksByAuthor(@PathVariable String bookAuthor) throws BookNotFoundException, Exception{
+	@RequestMapping(value="/member/searchByAuthor/{bookAuthor}", method = RequestMethod.GET)
+	public ResponseEntity<List<Books>> viewAllBooksByAuthor(@PathVariable String bookAuthor) throws BookNotFoundException{
 		//TODO: error handler
 		return ResponseEntity.accepted().body(bookService.searchBookByAuthor(bookAuthor));
 	}
 	
-	@RequestMapping(value="/member/searchByName/{category}", method = RequestMethod.GET)
-	public ResponseEntity<List<Books>> searchBookByCategory(@PathVariable String category) throws BookNotFoundException, Exception{
+	@RequestMapping(value="/member/searchByCategory/{category}", method = RequestMethod.GET)
+	public ResponseEntity<List<Books>> searchBookByCategory(@PathVariable String category) throws BookNotFoundException{
 		//TODO: error handler
 		return ResponseEntity.accepted().body(bookService.searchBookByCategory(category));
 	}
 	
 	@RequestMapping(value="/member/addIssueRequest/{memberMailId}/{bookName}/{bookAuthor}", method = RequestMethod.POST)
-	public ResponseEntity<Boolean> addIssueRequest(String memberMailId, String bookName, String bookAuthor) throws Exception{
+	public ResponseEntity<Boolean> addIssueRequest(@PathVariable String memberMailId,@PathVariable String bookName,@PathVariable String bookAuthor) throws Exception{
 		//TODO: error handler
 		return ResponseEntity.accepted().body(issueService.addIssueRequest(memberMailId, bookName, bookAuthor));
 	}

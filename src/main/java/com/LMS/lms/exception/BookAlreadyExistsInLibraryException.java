@@ -1,6 +1,6 @@
 package com.LMS.lms.exception;
 
-public class BookAlreadyExistsInLibraryException extends Exception {
+public class BookAlreadyExistsInLibraryException extends RuntimeException {
 
 	/**
 	 * 

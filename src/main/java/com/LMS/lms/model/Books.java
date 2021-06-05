@@ -1,5 +1,7 @@
 package com.LMS.lms.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -7,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="books")
-public class Books {
+public class Books implements Serializable{
 	
 	@Id
 	@Column(name="book_name", length=150)

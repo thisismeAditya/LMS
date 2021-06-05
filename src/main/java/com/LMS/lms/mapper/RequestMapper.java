@@ -17,7 +17,6 @@ public class RequestMapper implements RowMapper<Request>{
 		req.setRequesterMailId(rs.getString("requester_mail_id"));
 		req.setBookName(rs.getString("book_name"));
 		req.setBookAuthor(rs.getString("book_author"));
-		req.setIfAdded(rs.getString("if_added"));
 		
 		return req;
 		

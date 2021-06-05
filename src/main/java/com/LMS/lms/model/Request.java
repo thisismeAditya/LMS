@@ -1,15 +1,15 @@
 package com.LMS.lms.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="requests")
-public class Request {
+public class Request implements Serializable{
 	
 	@Id
 	@Column(name="requester_mail_id")
@@ -23,8 +23,6 @@ public class Request {
 	@Column(name="book_author", length=150)
 	private String bookAuthor;
 	
-	@Enumerated(EnumType.STRING)
-	private String ifAdded;
 	
 	public String getRequesterMailId() {
 		return requesterMailId;
@@ -44,19 +42,12 @@ public class Request {
 	public void setBookAuthor(String bookAuthor) {
 		this.bookAuthor = bookAuthor;
 	}
-	public String getIfAdded() {
-		return ifAdded;
-	}
-	public void setIfAdded(String ifAdded) {
-		this.ifAdded = ifAdded;
-	}
 	
-	public Request(String requesterMailId, String bookName, String bookAuthor, String ifAdded) {
+	public Request(String requesterMailId, String bookName, String bookAuthor) {
 		super();
 		this.requesterMailId = requesterMailId;
 		this.bookName = bookName;
 		this.bookAuthor = bookAuthor;
-		this.ifAdded = ifAdded;
 	}
 	
 	public Request() {

@@ -1,6 +1,6 @@
 package com.LMS.lms.exception;
 
-public class NoRecordsFoundException extends Exception {
+public class NoRecordsFoundException extends RuntimeException {
 
 	/**
 	 * 

@@ -1,11 +1,17 @@
 package com.LMS.lms.exceptionHandler;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
+import com.LMS.lms.exception.BookAlreadyDeletedException;
 import com.LMS.lms.exception.BookAlreadyExistsInLibraryException;
 import com.LMS.lms.exception.BookAlreadyRequestedException;
 import com.LMS.lms.exception.BookNotFoundException;
@@ -95,4 +101,24 @@ public class ExceptionController {
 		//409 Conflict
 		return new ResponseEntity<Object>("Book already requested!", HttpStatus.CONFLICT);
 	}
+	
+	@ExceptionHandler(value = HttpMessageNotReadableException.class)
+	   public ResponseEntity<Object> exception(HttpMessageNotReadableException exception) {
+	      return new ResponseEntity<>("No data Entered!", HttpStatus.INTERNAL_SERVER_ERROR);
+	   }
+	
+	@ExceptionHandler(value = NoHandlerFoundException.class)
+	   public ResponseEntity<Object> exception(NoHandlerFoundException exception) {
+	      return new ResponseEntity<>("Error encountered!", HttpStatus.INTERNAL_SERVER_ERROR);
+	   }
+
+	@ExceptionHandler(value = ConfigDataResourceNotFoundException.class)
+	   public ResponseEntity<Object> exception(ConfigDataResourceNotFoundException exception) {
+	      return new ResponseEntity<>("Error encountered!", HttpStatus.INTERNAL_SERVER_ERROR);
+	   }
+	
+	@ExceptionHandler(value = BookAlreadyDeletedException.class)
+	   public ResponseEntity<Object> exception(BookAlreadyDeletedException exception) {
+	      return new ResponseEntity<>("Book Already Deleted!", HttpStatus.INTERNAL_SERVER_ERROR);
+	   }
 }

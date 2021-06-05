@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.LMS.lms.exception.EmailAlreadyExistsException;
 import com.LMS.lms.exception.NoRecordsFoundException;
@@ -15,6 +16,7 @@ import com.LMS.lms.model.Admin;
 import com.LMS.lms.model.Issues;
 import com.LMS.lms.model.Member;
 
+@Repository
 public class AdminDaoImpl implements IAdminDao {
 	
 	@Autowired

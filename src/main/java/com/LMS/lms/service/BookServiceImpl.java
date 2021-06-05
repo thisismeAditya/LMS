@@ -3,6 +3,7 @@ package com.LMS.lms.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.LMS.lms.dao.IBookDao;
 import com.LMS.lms.exception.BookNotFoundException;
@@ -10,6 +11,7 @@ import com.LMS.lms.exception.NoRecordsFoundException;
 import com.LMS.lms.model.Books;
 import com.LMS.lms.model.Issues;
 
+@Service
 public class BookServiceImpl implements IBookService {
 	
 	@Autowired

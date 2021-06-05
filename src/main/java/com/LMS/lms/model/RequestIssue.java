@@ -1,5 +1,7 @@
 package com.LMS.lms.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -7,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="requestIssues")
-public class RequestIssue {
+public class RequestIssue implements Serializable{
 	
 	@Id
 	@Column(name="member_mail_id", length=30)

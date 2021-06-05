@@ -1,6 +1,6 @@
 package com.LMS.lms.exception;
 
-public class EmailAlreadyExistsException extends RuntimeException {
+public class BookAlreadyDeletedException extends RuntimeException{
 
 	/**
 	 * 

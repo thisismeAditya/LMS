@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
+import com.LMS.lms.exception.BookAlreadyDeletedException;
 import com.LMS.lms.exception.BookAlreadyExistsInLibraryException;
 import com.LMS.lms.exception.NoRecordsFoundException;
 import com.LMS.lms.mapper.BookMapper;
@@ -12,6 +14,7 @@ import com.LMS.lms.mapper.RequestMapper;
 import com.LMS.lms.model.Books;
 import com.LMS.lms.model.Request;
 
+@Repository
 public class RequestServiceDaoImpl implements IRequestServiceDao {
 	
 	@Autowired
@@ -44,7 +47,7 @@ public class RequestServiceDaoImpl implements IRequestServiceDao {
 		List<Books> bookList = jdbcTemplate.query(sql, new BookMapper());
 		
 		if(bookList.isEmpty()) {
-			String s = "insert into requests values (?,?,?,'N')";
+			String s = "insert into requests values (?,?,?)";
 			int update = jdbcTemplate.update(s, memberMailId, bookName, bookAuthor);
 			
 			if (update < 0) {
@@ -59,7 +62,7 @@ public class RequestServiceDaoImpl implements IRequestServiceDao {
 
 	@Override
 	public List<Request> viewRequest(String memberMailId) throws NoRecordsFoundException {
-		String sql = "select * from requests where member_mail_id='"+memberMailId+"'";
+		String sql = "select * from requests where requester_mail_id='"+memberMailId+"'";
 		List<Request> requestList = jdbcTemplate.query(sql, new RequestMapper());
 		
 		if(requestList.isEmpty()) {
@@ -71,11 +74,11 @@ public class RequestServiceDaoImpl implements IRequestServiceDao {
 
 	@Override
 	public boolean removeRequestByMember(String memberMailId, String bookName, String bookAuthor) throws Exception {
-		String sql = "delete from requests where member_mail_id=? and bookName=? and bookAuthor=?";
-		int update = jdbcTemplate.update(sql, memberMailId, bookName, bookAuthor);
+		String sql = "delete from requests where requester_mail_id='"+memberMailId+"' and book_name='"+bookName+"' and book_author='"+bookAuthor+"'";
+		int update = jdbcTemplate.update(sql);
 		
 		if(update < 1) {
-			throw new Exception();
+			throw new BookAlreadyDeletedException();
 		}
 		
 		return true;

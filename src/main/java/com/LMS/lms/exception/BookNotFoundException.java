@@ -1,6 +1,6 @@
 package com.LMS.lms.exception;
 
-public class BookNotFoundException extends Exception {
+public class BookNotFoundException extends RuntimeException {
 
 	/**
 	 * 

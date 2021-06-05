@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.util.Calendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.LMS.lms.exception.BookAlreadyRequestedException;
 import com.LMS.lms.exception.BookNotFoundException;
@@ -14,6 +15,7 @@ import com.LMS.lms.mapper.RequestIssueMapper;
 import com.LMS.lms.model.Issues;
 import com.LMS.lms.model.RequestIssue;
 
+@Repository
 public class IssueDaoImpl implements IIssueDao{
 	
 	static final float PENALTY_PER_DAY = 5;

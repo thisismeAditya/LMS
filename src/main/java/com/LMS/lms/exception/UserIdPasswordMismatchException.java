@@ -1,6 +1,6 @@
 package com.LMS.lms.exception;
 
-public class UserIdPasswordMismatchException extends Exception {
+public class UserIdPasswordMismatchException extends RuntimeException {
 
 	/**
 	 * 

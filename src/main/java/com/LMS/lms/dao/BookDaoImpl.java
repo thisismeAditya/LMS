@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.LMS.lms.exception.BookNotFoundException;
 import com.LMS.lms.exception.NoRecordsFoundException;
@@ -12,6 +13,7 @@ import com.LMS.lms.mapper.IssueMapper;
 import com.LMS.lms.model.Books;
 import com.LMS.lms.model.Issues;
 
+@Repository
 public class BookDaoImpl implements IBookDao {
 	
 	@Autowired
