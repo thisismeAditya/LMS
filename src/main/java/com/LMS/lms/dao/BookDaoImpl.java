@@ -3,6 +3,7 @@ package com.LMS.lms.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -20,19 +21,14 @@ public class BookDaoImpl implements IBookDao {
 	JdbcTemplate jdbcTemplate;
 
 	@Override
-	public boolean addBook(Books book) throws Exception {
-		String sql = "insert into books values(?,?,?,?,?,?)";
-		int rowChange = jdbcTemplate.update(sql, book.getBookName(), book.getBookAuthor(), book.getCategory(), book.getTotalBooks(), book.getAvailableBooks(), book.getLanguage());
-		
-		if(rowChange < 1) {
+	public boolean addBook(Books book) {
+		try {
+			String sql = "insert into books(book_name,book_author,category,total_books,language) values(?,?,?,?,?)";
+			jdbcTemplate.update(sql, book.getBookName(), book.getBookAuthor(), book.getCategory(), book.getTotalBooks(), book.getLanguage());
+		}catch(DuplicateKeyException e) {
 			String s = "UPDATE books SET available_books=available_books+"+book.getTotalBooks()+", total_books=total_books+"+book.getTotalBooks()+" where book_name='"+book.getBookName()+"' and book_author='"+book.getBookAuthor()+"'";
-			int updated = jdbcTemplate.update(s);
-			
-			if(updated < 1) {
-				throw new Exception();
-			}
+			jdbcTemplate.update(s);
 		}
-		
 		return true;
 	}
 
@@ -50,7 +46,7 @@ public class BookDaoImpl implements IBookDao {
 
 	@Override
 	public boolean removeBookFromLibrary(String bookName, String bookAuthor) throws BookNotFoundException {
-		String sql = "delete from books where book_name like'%"+bookName+"%' and book_author like'%"+bookAuthor+"%'";
+		String sql = "delete from books where book_name='"+bookName+"' and book_author='"+bookAuthor+"'";
 		
 		int deletedRow = jdbcTemplate.update(sql);
 		

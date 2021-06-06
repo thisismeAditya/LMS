@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.LMS.lms.exception.BookAlreadyDeletedException;
 import com.LMS.lms.exception.BookAlreadyExistsInLibraryException;
+import com.LMS.lms.exception.BookNotFoundException;
 import com.LMS.lms.exception.NoRecordsFoundException;
 import com.LMS.lms.mapper.BookMapper;
 import com.LMS.lms.mapper.RequestMapper;
@@ -35,10 +36,14 @@ public class RequestServiceDaoImpl implements IRequestServiceDao {
 	@Override
 	public boolean removeRequestsByAdmin(String bookName, String bookAuthor) throws Exception{
 		String sql = "delete from requests where book_name like '%"+bookName+"%' and book_author like '%"+bookAuthor+"%'";
-		
-		jdbcTemplate.update(sql);
-		
-		return true;
+		int rowsChanged=jdbcTemplate.update(sql);
+		if(rowsChanged<1) {
+			throw new BookNotFoundException();
+		}
+		else {
+			return true;
+		}
+
 	}
 
 	@Override

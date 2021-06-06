@@ -22,6 +22,7 @@ public class IssueMapper implements RowMapper<Issues>{
 		issue.setDateOfReturn(rs.getDate("date_of_return"));
 		issue.setReturnedOn(rs.getDate("actual_date_of_return"));
 		issue.setPenalty(rs.getFloat("penalty"));
+		issue.setPenaltyLastUpdatedOn(rs.getDate("penalty_last_updated_on"));
 		
 		return issue;
 	}

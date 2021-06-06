@@ -3,6 +3,8 @@ package com.LMS.lms.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -41,21 +43,24 @@ public class AdminDaoImpl implements IAdminDao {
 		throw new UserNotFoundException();
 	}
 
-	private Admin checkIfEmailExists(String adminMailId){
-		String sql = "select admin_mail_id, admin_name, admin_password from admin where admin_mail_id='"+adminMailId+"'";
-		Admin admin = jdbcTemplate.queryForObject(sql, new AdminEmailRowMapper());
-		
-		return admin;
+	private Admin checkIfEmailExists(String adminMailId) throws EmptyResultDataAccessException{
+		try {
+			String sql = "select admin_mail_id, admin_name, admin_password from admins where admin_mail_id='"+adminMailId+"'";
+			Admin admin = jdbcTemplate.queryForObject(sql, new AdminEmailRowMapper());
+			return admin;
+		}catch(EmptyResultDataAccessException e) {
+			return null;
+		}
 	}
 
 	@Override
 	public boolean addnewMember(Member member) throws EmailAlreadyExistsException {
 		// TODO Auto-generated method stub
-		
-		String sql = "insert into members values(?,?,?,?)";
-		int rowChange = jdbcTemplate.update(sql, member.getMemberMailId(), member.getMemberName(), member.getMemberPassword(), member.getAdminMailId());
-		
-		if(rowChange < 1) {
+		try {
+			String sql = "insert into members values(?,?,?,?)";
+			int rowChange = jdbcTemplate.update(sql, member.getMemberMailId(), member.getMemberName(), member.getMemberPassword(), member.getAdminMailId());
+			
+		}catch(DuplicateKeyException e) {
 			throw new EmailAlreadyExistsException();
 		}
 		

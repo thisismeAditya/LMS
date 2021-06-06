@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.LMS.lms.dao.IIssueDao;
+import com.LMS.lms.exception.BookAlreadyReturnedException;
 import com.LMS.lms.exception.BookNotFoundException;
+import com.LMS.lms.exception.IssueIdNotFoundException;
+import com.LMS.lms.exception.NoIssueFoundForMemberMailIdException;
 import com.LMS.lms.model.Issues;
 import com.LMS.lms.model.RequestIssue;
 
@@ -18,13 +21,13 @@ public class IssueServiceImpl implements IIssueService {
 
 
 	@Override
-	public Issues closingIssues(int issueId) throws BookNotFoundException {
+	public Issues closingIssues(int issueId) throws BookNotFoundException, BookAlreadyReturnedException, IssueIdNotFoundException {
 		// TODO Auto-generated method stub
 		return issueDao.closingIssue(issueId);
 	}
 
 	@Override
-	public Issues renewingIssues(int issueId) throws BookNotFoundException {
+	public Issues renewingIssues(int issueId) throws BookNotFoundException, IssueIdNotFoundException, BookAlreadyReturnedException {
 		// TODO Auto-generated method stub
 		return issueDao.renewingIssues(issueId);
 	}
@@ -53,12 +56,6 @@ public class IssueServiceImpl implements IIssueService {
 		return issueDao.removeRequestFromRequestIssue(memberMailId, bookName, bookAuthor);
 	}
 
-	@Override
-	public boolean addIssues(String memberMailId, String bookName, String bookAuthor, String adminMailId)
-			throws Exception {
-		// TODO Auto-generated method stub
-		return issueDao.addRequestToIssue(memberMailId, bookName, bookAuthor, adminMailId);
-	}
 
 	@Override
 	public boolean updatePenalties() {
@@ -66,7 +63,7 @@ public class IssueServiceImpl implements IIssueService {
 	}
 
 	@Override
-	public float settlePenalties(String memberMailId, int issueId) {
+	public float settlePenalties(String memberMailId, int issueId) throws NoIssueFoundForMemberMailIdException {
 		return issueDao.settlePenalty(memberMailId, issueId);
 	}
 

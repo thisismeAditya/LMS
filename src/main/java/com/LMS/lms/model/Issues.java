@@ -42,6 +42,24 @@ public class Issues {
 	
 	@Column(name="penalty")
 	private float penalty;
+	
+	@Column(name="penalty_last_updated_on")
+	private Date penaltyLastUpdatedOn;
+
+	public Issues(int issueId, String memberMailId, String bookName, String bookAuthor, String adminMailId,
+			Date dateOfIssue, Date dateOfReturn, Date returnedOn, float penalty, Date penaltyLastUpdatedOn) {
+		super();
+		this.issueId = issueId;
+		this.memberMailId = memberMailId;
+		this.bookName = bookName;
+		this.bookAuthor = bookAuthor;
+		this.adminMailId = adminMailId;
+		this.dateOfIssue = dateOfIssue;
+		this.dateOfReturn = dateOfReturn;
+		this.returnedOn = returnedOn;
+		this.penalty = penalty;
+		this.penaltyLastUpdatedOn = penaltyLastUpdatedOn;
+	}
 
 	public int getIssueId() {
 		return issueId;
@@ -115,18 +133,12 @@ public class Issues {
 		this.penalty = penalty;
 	}
 
-	public Issues(int issueId, String memberMailId, String bookName, String bookAuthor, String adminMailId,
-			Date dateOfIssue, Date dateOfReturn, Date returnedOn, float penalty) {
-		super();
-		this.issueId = issueId;
-		this.memberMailId = memberMailId;
-		this.bookName = bookName;
-		this.bookAuthor = bookAuthor;
-		this.adminMailId = adminMailId;
-		this.dateOfIssue = dateOfIssue;
-		this.dateOfReturn = dateOfReturn;
-		this.returnedOn = returnedOn;
-		this.penalty = penalty;
+	public Date getPenaltyLastUpdatedOn() {
+		return penaltyLastUpdatedOn;
+	}
+
+	public void setPenaltyLastUpdatedOn(Date penaltyLastUpdatedOn) {
+		this.penaltyLastUpdatedOn = penaltyLastUpdatedOn;
 	}
 
 	public Issues() {
