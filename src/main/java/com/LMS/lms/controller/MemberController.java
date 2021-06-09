@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.LMS.lms.exception.BookAlreadyExistsInLibraryException;
@@ -113,8 +114,8 @@ public class MemberController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/member/viewTotalPenalty/{memberMailId}", method = RequestMethod.GET)
-	public ResponseEntity<Float> viewPenalty(@PathVariable String memberMailId) throws Exception{
-		return ResponseEntity.accepted().body(memberService.getPenalty(memberMailId));
+	public ResponseEntity<String> viewPenalty(@PathVariable String memberMailId) throws Exception{
+		return ResponseEntity.accepted().body(String.valueOf(memberService.getPenalty(memberMailId)));
 	}
 	
 	/**
@@ -201,6 +202,9 @@ public class MemberController {
 	 */
 	@RequestMapping(value="/member/searchByCategory/{category}", method = RequestMethod.GET)
 	public ResponseEntity<List<Books>> searchBookByCategory(@PathVariable String category) throws BookNotFoundException{
+		if (category == null) {
+			throw new BookNotFoundException();
+		}
 		return ResponseEntity.accepted().body(bookService.searchBookByCategory(category));
 	}
 	
@@ -217,6 +221,22 @@ public class MemberController {
 	@RequestMapping(value="/member/addIssueRequest/{memberMailId}/{bookName}/{bookAuthor}", method = RequestMethod.POST)
 	public ResponseEntity<Boolean> addIssueRequest(@PathVariable String memberMailId,@PathVariable String bookName,@PathVariable String bookAuthor) throws Exception{
 		return ResponseEntity.accepted().body(issueService.addIssueRequest(memberMailId, bookName, bookAuthor));
+	}
+	
+	
+	@RequestMapping(value="/member/searchByCategory/", method = RequestMethod.GET)
+	public ResponseEntity<List<Books>> viewAllBooks_nullCategory() throws Exception{
+		return ResponseEntity.accepted().body(bookService.viewAllBooks());
+	}
+	
+	@RequestMapping(value="/member/searchByName/", method = RequestMethod.GET)
+	public ResponseEntity<List<Books>> viewAllBooks_nullBookTitle() throws Exception{
+		return ResponseEntity.accepted().body(bookService.viewAllBooks());
+	}
+	
+	@RequestMapping(value="/member/searchByAuthor/", method = RequestMethod.GET)
+	public ResponseEntity<List<Books>> viewAllBooks_nullBookAuthor() throws Exception{
+		return ResponseEntity.accepted().body(bookService.viewAllBooks());
 	}
 	
 }
