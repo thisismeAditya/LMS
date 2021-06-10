@@ -94,4 +94,15 @@ public class MemberDaoImpl implements IMemberDao {
 		return totalPenalty;
 	}
 
+	@Override
+	public Member getMemberByMailId(String memberMailId) {
+		try {
+			String sql="select member_mail_id,member_name, member_password,admin_mail_id from members where member_mail_id='"+memberMailId+"'"; 
+			Member member=jdbcTemplate.queryForObject(sql, new MemberMapper());
+			return member;
+		}catch(EmptyResultDataAccessException e) {
+			throw new UserNotFoundException();
+		}
+	}
+
 }

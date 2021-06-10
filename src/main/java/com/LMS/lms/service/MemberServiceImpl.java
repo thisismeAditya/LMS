@@ -72,4 +72,9 @@ public class MemberServiceImpl implements IMemberService {
 		return memberDao.getPenatlyByMemberId(memberMailId);
 	}
 
+	@Override
+	public Member getMemberByMailId(String memberMailId) {
+		return memberDao.getMemberByMailId(memberMailId);
+	}
+
 }

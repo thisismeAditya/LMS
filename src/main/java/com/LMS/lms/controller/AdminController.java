@@ -29,6 +29,7 @@ import com.LMS.lms.model.RequestIssue;
 import com.LMS.lms.service.IAdminService;
 import com.LMS.lms.service.IBookService;
 import com.LMS.lms.service.IIssueService;
+import com.LMS.lms.service.IMemberService;
 import com.LMS.lms.service.IRequestService;
 
 /**
@@ -48,6 +49,9 @@ public class AdminController {
 	
 	@Autowired
 	IBookService bookService;
+	
+	@Autowired 
+	IMemberService memberService;
 	
 	@Autowired
 	IRequestService requestService;
@@ -120,6 +124,7 @@ public class AdminController {
 	@RequestMapping(value="/admin/addBook", method = RequestMethod.POST)
 	public ResponseEntity<Boolean> addBook(@RequestBody Books book) throws Exception{
 		//TODO: error handler (handle the duplicateKeyException, that is to increase the number of total books by try catch in service class)
+		System.out.println(book.getTotalBooks());
 		return ResponseEntity.accepted().body(bookService.addBook(book));
 	}
 	
@@ -285,5 +290,18 @@ public class AdminController {
 	public ResponseEntity<Float> updateAllPenalties(@PathVariable String memberMailId, @PathVariable int issueId) throws NoIssueFoundForMemberMailIdException {
 		//TODO: error handler show where actual date of return is null 
 		return ResponseEntity.accepted().body(issueService.settlePenalties(memberMailId, issueId));
+	}
+	
+	/**
+	 * This method returns member by searching by memberMailId. 
+	 * Returns to the admin side.
+	 * @param memberMailId
+	 * @return
+	 * @throws UserNotFoundException
+	 */
+	@RequestMapping(value="/admin/getMember/{memberMailId}", method = RequestMethod.GET)
+	public ResponseEntity<Member> getMember(@PathVariable String memberMailId) throws UserNotFoundException {
+		//TODO: error handler show where actual date of return is null 
+		return ResponseEntity.accepted().body(memberService.getMemberByMailId(memberMailId));
 	}
 }

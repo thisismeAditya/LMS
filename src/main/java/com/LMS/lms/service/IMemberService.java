@@ -14,5 +14,6 @@ public interface IMemberService {
 	public List<Issues> getIssuesByBookName(String memberMailId, String bookName) throws Exception;
 	public List<Issues> getIssuesByBookAuthor(String memberMailId,String bookAuthor) throws Exception;
 	public float getPenalty(String memberMailId) throws Exception;
+	public Member getMemberByMailId(String memberMailId);
 
 }

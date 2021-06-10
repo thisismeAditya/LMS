@@ -117,12 +117,16 @@ public class IssueDaoImpl implements IIssueDao{
 		 
 		 try {
 			 boolean deleteFromIssueRequest=removeRequestFromRequestIssue(memberMailId, bookName, bookAuthor);
+			 System.out.println(deleteFromIssueRequest);
 			 if(deleteFromIssueRequest) {
 				 String insertingToIssues = "insert into issues (member_mail_id,book_name,book_author,admin_mail_id, date_of_issue, date_of_return) values (?,?,?,?,?,?)";
 				 String decreasingNoOfAvailableBooks="update books set available_books=available_books-1 where book_name='"+bookName+"' and book_author='"+bookAuthor+"'";
 				 
-				 int insertInIssues = jdbcTemplate.update(insertingToIssues, memberMailId, bookName, bookAuthor, adminMailId, dateOfIssue, dateOfReturn);
 				 int updateInBooks = jdbcTemplate.update(decreasingNoOfAvailableBooks);
+				 int insertInIssues = jdbcTemplate.update(insertingToIssues, memberMailId, bookName, bookAuthor, adminMailId, dateOfIssue, dateOfReturn);
+				 
+				 
+				 System.out.println(insertInIssues+"----"+updateInBooks);
 				 
 				 if(insertInIssues==1 && updateInBooks==1) {
 					 return true;
@@ -150,11 +154,12 @@ public class IssueDaoImpl implements IIssueDao{
 	}
 
 	@Override
-	public boolean removeRequestFromRequestIssue(String memberMailId, String bookName, String bookAuthor) throws Exception{
-		String sql = "delete from requestIssues where member_mail_id=? and book_name=? and book_author=?";
-		int update=jdbcTemplate.update(sql, memberMailId, bookName, bookAuthor);
+	public boolean removeRequestFromRequestIssue(String memberMailId, String bookName, String bookAuthor) {
+		String sql = "delete from requestIssues where member_mail_id='"+memberMailId+"' and book_name='"+bookName+"' and book_author='"+bookAuthor+"'";
 		
-		return update>=1;
+		int update=jdbcTemplate.update(sql);
+		System.out.println(update);
+		return update>=1? true:false;
 	}
 
 	@Override

@@ -19,4 +19,6 @@ public interface IMemberDao {
 
 	public float getPenatlyByMemberId(String memberMailId) throws Exception;
 
+	public Member getMemberByMailId(String memberMailId);
+
 }

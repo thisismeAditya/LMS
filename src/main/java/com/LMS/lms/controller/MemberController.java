@@ -219,4 +219,19 @@ public class MemberController {
 		return ResponseEntity.accepted().body(issueService.addIssueRequest(memberMailId, bookName, bookAuthor));
 	}
 	
+	@RequestMapping(value="/member/searchByCategory/", method = RequestMethod.GET)
+	public ResponseEntity<List<Books>> viewAllBooks_nullCategory() throws Exception{
+		return ResponseEntity.accepted().body(bookService.viewAllBooks());
+	}
+	
+	@RequestMapping(value="/member/searchByName/", method = RequestMethod.GET)
+	public ResponseEntity<List<Books>> viewAllBooks_nullBookTitle() throws Exception{
+		return ResponseEntity.accepted().body(bookService.viewAllBooks());
+	}
+	
+	@RequestMapping(value="/member/searchByAuthor/", method = RequestMethod.GET)
+	public ResponseEntity<List<Books>> viewAllBooks_nullBookAuthor() throws Exception{
+		return ResponseEntity.accepted().body(bookService.viewAllBooks());
+	}
+	
 }
