@@ -174,18 +174,23 @@ public class IssueDaoImpl implements IIssueDao{
 				if(daysBetween(issues.getPenaltyLastUpdatedOn(), todayDate) < 0) {
 					float penalty = PENALTY_PER_DAY * Math.abs(daysBetween(issues.getPenaltyLastUpdatedOn(), todayDate));
 					
-					String s = "update issues set penalty=penalty+"+penalty+", penalty_last_updated_on='"+todayDate+"'  where issue_id="+issues.getIssueId();
+					String s = "update issues set penalty="+penalty+"  where issue_id="+issues.getIssueId();
 					jdbcTemplate.update(s);
 				}
 			}
-		}catch(EmptyResultDataAccessException e ) {	}
+		}catch(EmptyResultDataAccessException e ) {	
+			
+		}
 		return true;
 	}
 
 	@Override
 	public float settlePenalty(String memberMailId, int issueId) throws NoIssueFoundForMemberMailIdException {
 		
-		String settlePenalty = "update issues set penalty = 0 where issue_id="+issueId+" and member_mail_id='"+memberMailId+"'";
+		long millis=System.currentTimeMillis(); 
+		java.sql.Date todayDate=new java.sql.Date(millis);
+		
+		String settlePenalty = "update issues set penalty = 0, penalty_last_updated_on='"+todayDate+"' where issue_id="+issueId+" and member_mail_id='"+memberMailId+"'";
 		int update=jdbcTemplate.update(settlePenalty);
 		
 		if(update<1) {

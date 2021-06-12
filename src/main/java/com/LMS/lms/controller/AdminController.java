@@ -181,7 +181,7 @@ public class AdminController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="admin/removeRequest/{bookName}/{bookAuthor}", method = RequestMethod.DELETE)
+	@RequestMapping(value="/admin/removeRequest/{bookName}/{bookAuthor}", method = RequestMethod.DELETE)
 	public ResponseEntity<Boolean> removeBookRequest(@PathVariable String bookName, @PathVariable String bookAuthor) throws Exception{
 		//TODO: error handler , also show all unique(bookName, bookAuthor)
 		return ResponseEntity.accepted().body(requestService.adminRemovingRequest(bookName, bookAuthor));
